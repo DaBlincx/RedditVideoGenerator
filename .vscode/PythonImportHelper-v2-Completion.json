@@ -50,12 +50,39 @@
         "documentation": {}
     },
     {
-        "label": "os,",
+        "label": "os",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "os.",
-        "description": "os.",
-        "detail": "os.",
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "praw",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "praw",
+        "description": "praw",
+        "detail": "praw",
+        "documentation": {}
+    },
+    {
+        "label": "markdown_to_text",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "markdown_to_text",
+        "description": "markdown_to_text",
+        "detail": "markdown_to_text",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
         "documentation": {}
     },
     {
@@ -64,15 +91,6 @@
         "description": "videoscript",
         "isExtraImport": true,
         "detail": "videoscript",
-        "documentation": {}
-    },
-    {
-        "label": "os",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "os",
-        "description": "os",
-        "detail": "os",
         "documentation": {}
     },
     {
@@ -165,7 +183,7 @@
         "kind": 2,
         "importPath": "reddit",
         "description": "reddit",
-        "peekOfCode": "def getContent(outputDir, postOptionCount) -> VideoScript:\n    reddit = __getReddit()\n    existingPostIds = __getExistingPostIds(outputDir)\n    now = int( time.time() )\n    autoSelect = postOptionCount == 0\n    posts = []\n    print(\"evaluating posts...\")\n    postOptionCount = postOptionCount if postOptionCount != 0 else 1\n    print(f\"postOptionCount: {postOptionCount}\")\n    for submission in reddit.subreddit(\"askreddit\").top(time_filter=\"day\", limit=postOptionCount*10):",
+        "peekOfCode": "def getContent(outputDir, postOptionCount) -> VideoScript:\n    reddit = __getReddit()\n    existingPostIds = __getExistingPostIds(outputDir)\n    now = int(time.time())\n    autoSelect = postOptionCount == 0\n    posts = []\n    postOptionCount = postOptionCount if postOptionCount != 0 else 1\n    print(f\"postOptionCount: {postOptionCount}\")\n    for submission in reddit.subreddit(SUBREDDIT).top(time_filter=\"day\", limit=postOptionCount*3):\n        if (f\"{submission.id}.mp4\" in existingPostIds or submission.over_18):",
         "detail": "reddit",
         "documentation": {}
     },
@@ -179,11 +197,47 @@
         "documentation": {}
     },
     {
-        "label": "redditUrl",
+        "label": "CLIENT_ID",
         "kind": 5,
         "importPath": "reddit",
         "description": "reddit",
-        "peekOfCode": "redditUrl = \"https://www.reddit.com/\"\ndef getContent(outputDir, postOptionCount) -> VideoScript:\n    reddit = __getReddit()\n    existingPostIds = __getExistingPostIds(outputDir)\n    now = int( time.time() )\n    autoSelect = postOptionCount == 0\n    posts = []\n    print(\"evaluating posts...\")\n    postOptionCount = postOptionCount if postOptionCount != 0 else 1\n    print(f\"postOptionCount: {postOptionCount}\")",
+        "peekOfCode": "CLIENT_ID = \"YOUR_CLIENT_ID_HERE\"\nCLIENT_SECRET = \"YOUR_CLIENT_SECRET_HERE\"\nUSER_AGENT = \"YOUR_USER_AGENT_HERE\" \n# user_agent sounds scary, but it's just a string to identify what your using it for\n# It's common courtesy to use something like <platform>:<name>:<version> by <your name>\n# ex. \"Window11:TestApp:v0.1 by u/Shifty-The-Dev\"\nSUBREDDIT = \"askreddit\"\nREDDIT_URL = \"https://www.reddit.com/\"\ndef getContent(outputDir, postOptionCount) -> VideoScript:\n    reddit = __getReddit()",
+        "detail": "reddit",
+        "documentation": {}
+    },
+    {
+        "label": "CLIENT_SECRET",
+        "kind": 5,
+        "importPath": "reddit",
+        "description": "reddit",
+        "peekOfCode": "CLIENT_SECRET = \"YOUR_CLIENT_SECRET_HERE\"\nUSER_AGENT = \"YOUR_USER_AGENT_HERE\" \n# user_agent sounds scary, but it's just a string to identify what your using it for\n# It's common courtesy to use something like <platform>:<name>:<version> by <your name>\n# ex. \"Window11:TestApp:v0.1 by u/Shifty-The-Dev\"\nSUBREDDIT = \"askreddit\"\nREDDIT_URL = \"https://www.reddit.com/\"\ndef getContent(outputDir, postOptionCount) -> VideoScript:\n    reddit = __getReddit()\n    existingPostIds = __getExistingPostIds(outputDir)",
+        "detail": "reddit",
+        "documentation": {}
+    },
+    {
+        "label": "USER_AGENT",
+        "kind": 5,
+        "importPath": "reddit",
+        "description": "reddit",
+        "peekOfCode": "USER_AGENT = \"YOUR_USER_AGENT_HERE\" \n# user_agent sounds scary, but it's just a string to identify what your using it for\n# It's common courtesy to use something like <platform>:<name>:<version> by <your name>\n# ex. \"Window11:TestApp:v0.1 by u/Shifty-The-Dev\"\nSUBREDDIT = \"askreddit\"\nREDDIT_URL = \"https://www.reddit.com/\"\ndef getContent(outputDir, postOptionCount) -> VideoScript:\n    reddit = __getReddit()\n    existingPostIds = __getExistingPostIds(outputDir)\n    now = int(time.time())",
+        "detail": "reddit",
+        "documentation": {}
+    },
+    {
+        "label": "SUBREDDIT",
+        "kind": 5,
+        "importPath": "reddit",
+        "description": "reddit",
+        "peekOfCode": "SUBREDDIT = \"askreddit\"\nREDDIT_URL = \"https://www.reddit.com/\"\ndef getContent(outputDir, postOptionCount) -> VideoScript:\n    reddit = __getReddit()\n    existingPostIds = __getExistingPostIds(outputDir)\n    now = int(time.time())\n    autoSelect = postOptionCount == 0\n    posts = []\n    postOptionCount = postOptionCount if postOptionCount != 0 else 1\n    print(f\"postOptionCount: {postOptionCount}\")",
+        "detail": "reddit",
+        "documentation": {}
+    },
+    {
+        "label": "REDDIT_URL",
+        "kind": 5,
+        "importPath": "reddit",
+        "description": "reddit",
+        "peekOfCode": "REDDIT_URL = \"https://www.reddit.com/\"\ndef getContent(outputDir, postOptionCount) -> VideoScript:\n    reddit = __getReddit()\n    existingPostIds = __getExistingPostIds(outputDir)\n    now = int(time.time())\n    autoSelect = postOptionCount == 0\n    posts = []\n    postOptionCount = postOptionCount if postOptionCount != 0 else 1\n    print(f\"postOptionCount: {postOptionCount}\")\n    for submission in reddit.subreddit(SUBREDDIT).top(time_filter=\"day\", limit=postOptionCount*3):",
         "detail": "reddit",
         "documentation": {}
     },
