@@ -1,5 +1,7 @@
 from moviepy.editor import *
 import reddit, screenshot, time, subprocess, random, configparser, sys, math
+from os import listdir
+from os.path import isfile, join
 
 def createVideo():
     config = configparser.ConfigParser()
@@ -23,11 +25,9 @@ def createVideo():
     # Setup background clip
     bgDir = config["General"]["BackgroundDirectory"]
     bgPrefix = config["General"]["BackgroundFilePrefix"]
-    bgCount = int(config["General"]["BackgroundVideos"])
-    bgMaxIndex = 0
-    for mp4 in os.listdir(bgDir): 
-        if mp4.endswith(".mp4"): bgMaxIndex += 1
-    bgIndex = random.randint(0, bgMaxIndex)
+    bgFiles = [f for f in listdir(bgDir) if isfile(join(bgDir, f))]
+    bgCount = len(bgFiles)
+    bgIndex = random.randint(0, bgCount-1)
     print(f"Using background video {bgIndex} of {bgCount} ({bgPrefix}{bgIndex}.mp4)")
     backgroundVideo = VideoFileClip(
         filename=f"{bgDir}/{bgPrefix}{bgIndex:03d}.mp4", 
