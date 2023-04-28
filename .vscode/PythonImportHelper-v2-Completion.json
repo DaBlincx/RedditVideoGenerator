@@ -288,7 +288,7 @@
         "kind": 2,
         "importPath": "screenshot",
         "description": "screenshot",
-        "peekOfCode": "def clickClose(driver):\n    print(\"tryna click icon_close\")\n    time.sleep(3)\n    driver.execute_script(\"document.getElementsByClassName('icon-close')[0].parentElement.click()\")\n    print(\"clicked\")\n    time.sleep(1)\ndef getPostScreenshots(filePrefix, script):\n    print(\"Starting Webdriver...\")\n    driver, wait = __setupDriver(script.url)\n    with open(\"cookies.json\", \"r\") as f:",
+        "peekOfCode": "def clickClose(driver):\n    print(\"tryna click icon_close\")\n    time.sleep(3)\n    driver.execute_script(\"document.getElementsByClassName('icon-close')[0].parentElement.click()\")\n    print(\"clicked\")\n    time.sleep(1)\ndef getPostScreenshots(filePrefix, script):\n    print(\"Starting Webdriver...\")\n    driver, wait = __setupDriver(script.url)\n    try:",
         "detail": "screenshot",
         "documentation": {}
     },
@@ -297,7 +297,7 @@
         "kind": 2,
         "importPath": "screenshot",
         "description": "screenshot",
-        "peekOfCode": "def getPostScreenshots(filePrefix, script):\n    print(\"Starting Webdriver...\")\n    driver, wait = __setupDriver(script.url)\n    with open(\"cookies.json\", \"r\") as f:\n        cookies = json.load(f)\n        for cookie in cookies:\n            driver.add_cookie(cookie)\n    time.sleep(1)\n    driver.refresh()\n    time.sleep(1)",
+        "peekOfCode": "def getPostScreenshots(filePrefix, script):\n    print(\"Starting Webdriver...\")\n    driver, wait = __setupDriver(script.url)\n    try:\n        with open(\"cookies.json\", \"r\") as f:\n            cookies = json.load(f)\n            for cookie in cookies:\n                driver.add_cookie(cookie)\n    except:\n        with open(\"cookies.json\", \"w\") as f:",
         "detail": "screenshot",
         "documentation": {}
     },

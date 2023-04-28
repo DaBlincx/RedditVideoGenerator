@@ -21,11 +21,19 @@ def clickClose(driver):
 def getPostScreenshots(filePrefix, script):
     print("Starting Webdriver...")
     driver, wait = __setupDriver(script.url)
-
-    with open("cookies.json", "r") as f:
-        cookies = json.load(f)
-        for cookie in cookies:
-            driver.add_cookie(cookie)
+    
+    try:
+        with open("cookies.json", "r") as f:
+            cookies = json.load(f)
+            for cookie in cookies:
+                driver.add_cookie(cookie)
+    except:
+        with open("cookies.json", "w") as f:
+            f.write()
+        print("No cookies.json found")
+        print("Check README.md for instructions on how to get cookies.json")
+        input("Press enter to exit...")
+        exit()
 
     time.sleep(1)
     driver.refresh()
