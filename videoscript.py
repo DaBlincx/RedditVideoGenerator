@@ -28,6 +28,7 @@ class VideoScript:
         return (len(self.frames) >= MIN_COMMENTS_FOR_FINISH) and (self.totalDuration > MIN_DURATION)
 
     def addCommentScene(self, text, commentId) -> None:
+        print(f"Adding comment scene for comment: {commentId}")
         wordCount = len(text.split())
         if (wordCount > MAX_WORDS_PER_COMMENT):
             return True
@@ -38,12 +39,15 @@ class VideoScript:
         self.frames.append(frame)
 
     def getDuration(self):
+        print(f"Total duration: {self.totalDuration}")
         return self.totalDuration
 
     def getFileName(self):
+        print(f"File name: {self.fileName}")
         return self.fileName
 
     def __createVoiceOver(self, name, text):
+        print(f"Creating voiceover for {name}...")
         file_path = voiceover.create_voice_over(f"{self.fileName}-{name}", text)
         audioClip = AudioFileClip(file_path)
         if (self.totalDuration + audioClip.duration > MAX_DURATION):

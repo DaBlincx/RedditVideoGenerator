@@ -1,0 +1,334 @@
+[
+    {
+        "label": "*",
+        "importPath": "moviepy.editor",
+        "description": "moviepy.editor",
+        "isExtraImport": true,
+        "detail": "moviepy.editor",
+        "documentation": {}
+    },
+    {
+        "label": "AudioFileClip",
+        "importPath": "moviepy.editor",
+        "description": "moviepy.editor",
+        "isExtraImport": true,
+        "detail": "moviepy.editor",
+        "documentation": {}
+    },
+    {
+        "label": "reddit,",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "reddit.",
+        "description": "reddit.",
+        "detail": "reddit.",
+        "documentation": {}
+    },
+    {
+        "label": "BeautifulSoup",
+        "importPath": "bs4",
+        "description": "bs4",
+        "isExtraImport": true,
+        "detail": "bs4",
+        "documentation": {}
+    },
+    {
+        "label": "markdown",
+        "importPath": "markdown",
+        "description": "markdown",
+        "isExtraImport": true,
+        "detail": "markdown",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "os,",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os.",
+        "description": "os.",
+        "detail": "os.",
+        "documentation": {}
+    },
+    {
+        "label": "VideoScript",
+        "importPath": "videoscript",
+        "description": "videoscript",
+        "isExtraImport": true,
+        "detail": "videoscript",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "webdriver",
+        "importPath": "selenium",
+        "description": "selenium",
+        "isExtraImport": true,
+        "detail": "selenium",
+        "documentation": {}
+    },
+    {
+        "label": "By",
+        "importPath": "selenium.webdriver.common.by",
+        "description": "selenium.webdriver.common.by",
+        "isExtraImport": true,
+        "detail": "selenium.webdriver.common.by",
+        "documentation": {}
+    },
+    {
+        "label": "WebDriverWait",
+        "importPath": "selenium.webdriver.support.ui",
+        "description": "selenium.webdriver.support.ui",
+        "isExtraImport": true,
+        "detail": "selenium.webdriver.support.ui",
+        "documentation": {}
+    },
+    {
+        "label": "expected_conditions",
+        "importPath": "selenium.webdriver.support",
+        "description": "selenium.webdriver.support",
+        "isExtraImport": true,
+        "detail": "selenium.webdriver.support",
+        "documentation": {}
+    },
+    {
+        "label": "time,",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time.",
+        "description": "time.",
+        "detail": "time.",
+        "documentation": {}
+    },
+    {
+        "label": "pyttsx3",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pyttsx3",
+        "description": "pyttsx3",
+        "detail": "pyttsx3",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "voiceover",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "voiceover",
+        "description": "voiceover",
+        "detail": "voiceover",
+        "documentation": {}
+    },
+    {
+        "label": "createVideo",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def createVideo():\n    config = configparser.ConfigParser()\n    config.read('config.ini')\n    outputDir = config[\"General\"][\"OutputDirectory\"]\n    startTime = time.time()\n    # Get script from reddit\n    # If a post id is listed, use that. Otherwise query top posts\n    print(\"starting reddit script\")\n    if (len(sys.argv) == 2):\n        script = reddit.getContentFromId(outputDir, sys.argv[1])",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "markdown_to_text",
+        "kind": 2,
+        "importPath": "markdown_to_text",
+        "description": "markdown_to_text",
+        "peekOfCode": "def markdown_to_text(markdown_string):\n    \"\"\" Converts a markdown string to plaintext \"\"\"\n    # md -> html -> text since BeautifulSoup can extract text cleanly\n    html = markdown(markdown_string)\n    # remove code snippets\n    html = re.sub(r'<pre>(.*?)</pre>', ' ', html)\n    html = re.sub(r'<code>(.*?)</code >', ' ', html)\n    html = re.sub(r'~~(.*?)~~', ' ', html)\n    # extract text\n    soup = BeautifulSoup(html, \"html.parser\")",
+        "detail": "markdown_to_text",
+        "documentation": {}
+    },
+    {
+        "label": "getContent",
+        "kind": 2,
+        "importPath": "reddit",
+        "description": "reddit",
+        "peekOfCode": "def getContent(outputDir, postOptionCount) -> VideoScript:\n    reddit = __getReddit()\n    existingPostIds = __getExistingPostIds(outputDir)\n    now = int( time.time() )\n    autoSelect = postOptionCount == 0\n    posts = []\n    print(\"evaluating posts...\")\n    postOptionCount = postOptionCount if postOptionCount != 0 else 1\n    print(f\"postOptionCount: {postOptionCount}\")\n    for submission in reddit.subreddit(\"askreddit\").top(time_filter=\"day\", limit=postOptionCount*10):",
+        "detail": "reddit",
+        "documentation": {}
+    },
+    {
+        "label": "getContentFromId",
+        "kind": 2,
+        "importPath": "reddit",
+        "description": "reddit",
+        "peekOfCode": "def getContentFromId(outputDir, submissionId) -> VideoScript:\n    print(f\"Getting content from id: {submissionId}\")\n    reddit = __getReddit()\n    existingPostIds = __getExistingPostIds(outputDir)\n    if (submissionId in existingPostIds):\n        print(\"Video already exists!\")\n        exit()\n    try:\n        submission = reddit.submission(submissionId)\n    except:",
+        "detail": "reddit",
+        "documentation": {}
+    },
+    {
+        "label": "redditUrl",
+        "kind": 5,
+        "importPath": "reddit",
+        "description": "reddit",
+        "peekOfCode": "redditUrl = \"https://www.reddit.com/\"\ndef getContent(outputDir, postOptionCount) -> VideoScript:\n    reddit = __getReddit()\n    existingPostIds = __getExistingPostIds(outputDir)\n    now = int( time.time() )\n    autoSelect = postOptionCount == 0\n    posts = []\n    print(\"evaluating posts...\")\n    postOptionCount = postOptionCount if postOptionCount != 0 else 1\n    print(f\"postOptionCount: {postOptionCount}\")",
+        "detail": "reddit",
+        "documentation": {}
+    },
+    {
+        "label": "removeTempFiles",
+        "kind": 2,
+        "importPath": "removeTempFiles",
+        "description": "removeTempFiles",
+        "peekOfCode": "def removeTempFiles():\n    for file in os.listdir(\"./Voiceovers\"):\n        os.remove(f\"./Voiceovers/{file}\")\n        print(f\"Removed {file}\")\n    for file in os.listdir(\"./Screenshots\"):\n        os.remove(f\"./Screenshots/{file}\")\n        print(f\"Removed {file}\")\nif __name__ == \"__main__\":\n    removeTempFiles()",
+        "detail": "removeTempFiles",
+        "documentation": {}
+    },
+    {
+        "label": "clickClose",
+        "kind": 2,
+        "importPath": "screenshot",
+        "description": "screenshot",
+        "peekOfCode": "def clickClose(driver):\n    print(\"tryna click icon_close\")\n    time.sleep(3)\n    driver.execute_script(\"document.getElementsByClassName('icon-close')[0].parentElement.click()\")\n    print(\"clicked\")\n    time.sleep(1)\ndef getPostScreenshots(filePrefix, script):\n    print(\"Starting Webdriver...\")\n    driver, wait = __setupDriver(script.url)\n    with open(\"cookies.json\", \"r\") as f:",
+        "detail": "screenshot",
+        "documentation": {}
+    },
+    {
+        "label": "getPostScreenshots",
+        "kind": 2,
+        "importPath": "screenshot",
+        "description": "screenshot",
+        "peekOfCode": "def getPostScreenshots(filePrefix, script):\n    print(\"Starting Webdriver...\")\n    driver, wait = __setupDriver(script.url)\n    with open(\"cookies.json\", \"r\") as f:\n        cookies = json.load(f)\n        for cookie in cookies:\n            driver.add_cookie(cookie)\n    time.sleep(1)\n    driver.refresh()\n    time.sleep(1)",
+        "detail": "screenshot",
+        "documentation": {}
+    },
+    {
+        "label": "screenshotDir",
+        "kind": 5,
+        "importPath": "screenshot",
+        "description": "screenshot",
+        "peekOfCode": "screenshotDir = \"Screenshots\"\nscreenWidth = 500\nscreenHeight = 1000\ndef clickClose(driver):\n    print(\"tryna click icon_close\")\n    time.sleep(3)\n    driver.execute_script(\"document.getElementsByClassName('icon-close')[0].parentElement.click()\")\n    print(\"clicked\")\n    time.sleep(1)\ndef getPostScreenshots(filePrefix, script):",
+        "detail": "screenshot",
+        "documentation": {}
+    },
+    {
+        "label": "screenWidth",
+        "kind": 5,
+        "importPath": "screenshot",
+        "description": "screenshot",
+        "peekOfCode": "screenWidth = 500\nscreenHeight = 1000\ndef clickClose(driver):\n    print(\"tryna click icon_close\")\n    time.sleep(3)\n    driver.execute_script(\"document.getElementsByClassName('icon-close')[0].parentElement.click()\")\n    print(\"clicked\")\n    time.sleep(1)\ndef getPostScreenshots(filePrefix, script):\n    print(\"Starting Webdriver...\")",
+        "detail": "screenshot",
+        "documentation": {}
+    },
+    {
+        "label": "screenHeight",
+        "kind": 5,
+        "importPath": "screenshot",
+        "description": "screenshot",
+        "peekOfCode": "screenHeight = 1000\ndef clickClose(driver):\n    print(\"tryna click icon_close\")\n    time.sleep(3)\n    driver.execute_script(\"document.getElementsByClassName('icon-close')[0].parentElement.click()\")\n    print(\"clicked\")\n    time.sleep(1)\ndef getPostScreenshots(filePrefix, script):\n    print(\"Starting Webdriver...\")\n    driver, wait = __setupDriver(script.url)",
+        "detail": "screenshot",
+        "documentation": {}
+    },
+    {
+        "label": "engine",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "engine = pyttsx3.init()\nvoices = engine.getProperty('voices')\nfor voice in voices:\n    print(voice, voice.id)\n    engine.setProperty('voice', voice.id)\n    engine.say(\"Hello World!\")\n    engine.runAndWait()\n    engine.stop()",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "voices",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "voices = engine.getProperty('voices')\nfor voice in voices:\n    print(voice, voice.id)\n    engine.setProperty('voice', voice.id)\n    engine.say(\"Hello World!\")\n    engine.runAndWait()\n    engine.stop()",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "VideoScript",
+        "kind": 6,
+        "importPath": "videoscript",
+        "description": "videoscript",
+        "peekOfCode": "class VideoScript:\n    title = \"\"\n    fileName = \"\"\n    titleSCFile = \"\"\n    url = \"\"\n    totalDuration = 0\n    frames = []\n    def __init__(self, url, title, fileId) -> None:\n        self.fileName = f\"{datetime.today().strftime('%Y-%m-%d')}-{fileId}\"\n        self.url = url",
+        "detail": "videoscript",
+        "documentation": {}
+    },
+    {
+        "label": "ScreenshotScene",
+        "kind": 6,
+        "importPath": "videoscript",
+        "description": "videoscript",
+        "peekOfCode": "class ScreenshotScene:\n    text = \"\"\n    screenShotFile = \"\"\n    commentId = \"\"\n    def __init__(self, text, commentId) -> None:\n        self.text = text\n        self.commentId = commentId",
+        "detail": "videoscript",
+        "documentation": {}
+    },
+    {
+        "label": "MAX_WORDS_PER_COMMENT",
+        "kind": 5,
+        "importPath": "videoscript",
+        "description": "videoscript",
+        "peekOfCode": "MAX_WORDS_PER_COMMENT = 100\nMIN_COMMENTS_FOR_FINISH = 4\nMIN_DURATION = 20\nMAX_DURATION = 58\nclass VideoScript:\n    title = \"\"\n    fileName = \"\"\n    titleSCFile = \"\"\n    url = \"\"\n    totalDuration = 0",
+        "detail": "videoscript",
+        "documentation": {}
+    },
+    {
+        "label": "MIN_COMMENTS_FOR_FINISH",
+        "kind": 5,
+        "importPath": "videoscript",
+        "description": "videoscript",
+        "peekOfCode": "MIN_COMMENTS_FOR_FINISH = 4\nMIN_DURATION = 20\nMAX_DURATION = 58\nclass VideoScript:\n    title = \"\"\n    fileName = \"\"\n    titleSCFile = \"\"\n    url = \"\"\n    totalDuration = 0\n    frames = []",
+        "detail": "videoscript",
+        "documentation": {}
+    },
+    {
+        "label": "MIN_DURATION",
+        "kind": 5,
+        "importPath": "videoscript",
+        "description": "videoscript",
+        "peekOfCode": "MIN_DURATION = 20\nMAX_DURATION = 58\nclass VideoScript:\n    title = \"\"\n    fileName = \"\"\n    titleSCFile = \"\"\n    url = \"\"\n    totalDuration = 0\n    frames = []\n    def __init__(self, url, title, fileId) -> None:",
+        "detail": "videoscript",
+        "documentation": {}
+    },
+    {
+        "label": "MAX_DURATION",
+        "kind": 5,
+        "importPath": "videoscript",
+        "description": "videoscript",
+        "peekOfCode": "MAX_DURATION = 58\nclass VideoScript:\n    title = \"\"\n    fileName = \"\"\n    titleSCFile = \"\"\n    url = \"\"\n    totalDuration = 0\n    frames = []\n    def __init__(self, url, title, fileId) -> None:\n        self.fileName = f\"{datetime.today().strftime('%Y-%m-%d')}-{fileId}\"",
+        "detail": "videoscript",
+        "documentation": {}
+    },
+    {
+        "label": "create_voice_over",
+        "kind": 2,
+        "importPath": "voiceover",
+        "description": "voiceover",
+        "peekOfCode": "def create_voice_over(fileName, text):\n    print(f\"Creating voiceover for {fileName}...\")\n    filePath = f\"{voiceoverDir}/{fileName}.mp3\"\n    engine = pyttsx3.init()\n    engine.setProperty('voice', \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_EN-GB_HAZEL_11.0\")\n    engine.save_to_file(text, filePath)\n    engine.runAndWait()\n    return filePath",
+        "detail": "voiceover",
+        "documentation": {}
+    },
+    {
+        "label": "voiceoverDir",
+        "kind": 5,
+        "importPath": "voiceover",
+        "description": "voiceover",
+        "peekOfCode": "voiceoverDir = \"Voiceovers\"\ndef create_voice_over(fileName, text):\n    print(f\"Creating voiceover for {fileName}...\")\n    filePath = f\"{voiceoverDir}/{fileName}.mp3\"\n    engine = pyttsx3.init()\n    engine.setProperty('voice', \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_EN-GB_HAZEL_11.0\")\n    engine.save_to_file(text, filePath)\n    engine.runAndWait()\n    return filePath",
+        "detail": "voiceover",
+        "documentation": {}
+    }
+]

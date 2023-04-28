@@ -10,6 +10,7 @@ def createVideo():
 
     # Get script from reddit
     # If a post id is listed, use that. Otherwise query top posts
+    print("starting reddit script")
     if (len(sys.argv) == 2):
         script = reddit.getContentFromId(outputDir, sys.argv[1])
     else:
@@ -17,18 +18,24 @@ def createVideo():
         script = reddit.getContent(outputDir, postOptionCount)
     fileName = script.getFileName()
 
-    # Create screenshots
     screenshot.getPostScreenshots(fileName, script)
 
     # Setup background clip
     bgDir = config["General"]["BackgroundDirectory"]
     bgPrefix = config["General"]["BackgroundFilePrefix"]
     bgCount = int(config["General"]["BackgroundVideos"])
-    bgIndex = random.randint(0, bgCount-1)
+    bgMaxIndex = 0
+    for mp4 in os.listdir(bgDir): 
+        if mp4.endswith(".mp4"): bgMaxIndex += 1
+    bgIndex = random.randint(0, bgMaxIndex)
+    print(f"Using background video {bgIndex} of {bgCount} ({bgPrefix}{bgIndex}.mp4)")
     backgroundVideo = VideoFileClip(
-        filename=f"{bgDir}/{bgPrefix}{bgIndex}.mp4", 
+        filename=f"{bgDir}/{bgPrefix}{bgIndex:03d}.mp4", 
         audio=False).subclip(0, script.getDuration())
     w, h = backgroundVideo.size
+
+    # Create audio clips
+    print("Creating audio clips...")
 
     def __createClip(screenShotFile, audioClip, marginSize):
         imageClip = ImageClip(
@@ -71,17 +78,10 @@ def createVideo():
     )
     print(f"Video completed in {time.time() - startTime}")
 
-    # Preview in VLC for approval before uploading
-    if (config["General"].getboolean("PreviewBeforeUpload")):
-        vlcPath = config["General"]["VLCPath"]
-        p = subprocess.Popen([vlcPath, outputFile])
-        print("Waiting for video review. Type anything to continue")
-        wait = input()
-
     print("Video is ready to upload!")
     print(f"Title: {script.title}  File: {outputFile}")
     endTime = time.time()
-    print(f"Total time: {endTime - startTime}")
+    print(f"Total time: {(endTime - startTime):.01f} seconds")
 
 if __name__ == "__main__":
     createVideo()
