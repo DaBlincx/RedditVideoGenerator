@@ -35,9 +35,10 @@ def getContent(outputDir, postOptionCount) -> VideoScript:
 
     if autoSelect:
         return __getContentFromPost(posts[0])
-    postSelection = int(input("Input: "))
-    selectedPost = posts[postSelection]
-    return __getContentFromPost(selectedPost)
+    else:
+        postSelection = int(input("Input: "))
+        selectedPost = posts[postSelection]
+        return __getContentFromPost(selectedPost)
 
 def getContentFromId(outputDir, submissionId) -> VideoScript:
     print(f"Getting content from id: {submissionId}")
