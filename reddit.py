@@ -12,6 +12,7 @@ CLIENT_ID = config["Reddit"]["CLIENT_ID"]
 CLIENT_SECRET = config["Reddit"]["CLIENT_SECRET"]
 USER_AGENT = config["Reddit"]["USER_AGENT"]
 SUBREDDIT = config["Reddit"]["SUBREDDIT"]
+VOICEID = config["Voiceover"]["VOICEID"]
 
 def getContent(outputDir, postOptionCount) -> VideoScript:
     reddit = __getReddit()
@@ -65,13 +66,13 @@ def __getReddit():
 
 
 def __getContentFromPost(submission) -> VideoScript:
-    content = VideoScript(submission.url, submission.title, submission.id)
+    content = VideoScript(submission.url, submission.title, submission.id, VOICEID)
     print(f"Creating video for post: {submission.title}")
     print(f"Url: {submission.url}")
 
     failedAttempts = 0
     for comment in submission.comments:
-        if(content.addCommentScene(markdown_to_text.markdown_to_text(comment.body), comment.id)):
+        if(content.addCommentScene(markdown_to_text.markdown_to_text(comment.body), comment.id, VOICEID)):
             failedAttempts += 1
         if (content.canQuickFinish() or (failedAttempts > 2 and content.canBeFinished())):
             break

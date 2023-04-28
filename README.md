@@ -15,6 +15,7 @@ r/askreddit subreddit, and grabbing several comments. The workflow of this progr
 - Use the credentials from the previous step to update config.ini (lines 22 -> 24)
 - create a file called `cookies.json`
 - open `reddit.com/r/*somesubreddit*` in your browser and copy all cookies into cookies.json (using something like editthiscookie browser extension or defautl dev tools)
+- create an issue if you need help with the previous step
 
 Now, you can run `python main.py` to be prompted for which post to choose. Alternatively,
 you can run `python main.py <reddit-post-id>` to create a video for a specific post.
