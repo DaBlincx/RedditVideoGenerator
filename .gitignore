@@ -3,6 +3,7 @@ BackgroundVideos/*
 OutputVideos/*
 Screenshots/*
 Voiceovers/*
+.vscode/*
 Lib/*
 Scripts/*
 metadata.json
@@ -10,3 +11,5 @@ pyvenv.cfg
 client_secrets.json
 geckodriver.log
 config.ini
+cookies.json 
+newcookies.json 
