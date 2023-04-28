@@ -30,28 +30,26 @@ def getContent(outputDir, postOptionCount) -> VideoScript:
         hoursAgoPosted = (now - submission.created_utc) / 3600
         print(f"[{len(posts)}] {submission.title}     {submission.score}    {'{:.1f}'.format(hoursAgoPosted)} hours ago")
         posts.append(submission)
-        if autoSelect != 0:
-            if (autoSelect or len(posts) >= postOptionCount):
-                break
+        if autoSelect != 0 and (autoSelect or len(posts) >= postOptionCount):
+            break
 
     if autoSelect:
         return __getContentFromPost(posts[0])
-    else:
-        postSelection = int(input("Input: "))
-        selectedPost = posts[postSelection]
-        return __getContentFromPost(selectedPost)
+    postSelection = int(input("Input: "))
+    selectedPost = posts[postSelection]
+    return __getContentFromPost(selectedPost)
 
 def getContentFromId(outputDir, submissionId) -> VideoScript:
     print(f"Getting content from id: {submissionId}")
     reddit = __getReddit()
     existingPostIds = __getExistingPostIds(outputDir)
-    
+
     if (submissionId in existingPostIds):
         print("Video already exists!")
         exit()
     try:
         submission = reddit.submission(submissionId)
-    except:
+    except Exception:
         print(f"Submission with id '{submissionId}' not found!")
         exit()
     return __getContentFromPost(submission)
@@ -83,5 +81,5 @@ def __getExistingPostIds(outputDir):
     files = os.listdir(outputDir)
     # I'm sure anyone knowledgeable on python hates this. I had some weird 
     # issues and frankly didn't care to troubleshoot. It works though...
-    files = [f for f in files if os.path.isfile(outputDir+'/'+f)]
+    files = [f for f in files if os.path.isfile(f'{outputDir}/{f}')]
     return [re.sub(r'.*?-', '', file) for file in files]

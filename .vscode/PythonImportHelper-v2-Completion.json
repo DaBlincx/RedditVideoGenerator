@@ -118,6 +118,15 @@
         "documentation": {}
     },
     {
+        "label": "configparser",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "configparser",
+        "description": "configparser",
+        "detail": "configparser",
+        "documentation": {}
+    },
+    {
         "label": "webdriver",
         "importPath": "selenium",
         "description": "selenium",
@@ -216,7 +225,16 @@
         "kind": 2,
         "importPath": "reddit",
         "description": "reddit",
-        "peekOfCode": "def getContentFromId(outputDir, submissionId) -> VideoScript:\n    print(f\"Getting content from id: {submissionId}\")\n    reddit = __getReddit()\n    existingPostIds = __getExistingPostIds(outputDir)\n    if (submissionId in existingPostIds):\n        print(\"Video already exists!\")\n        exit()\n    try:\n        submission = reddit.submission(submissionId)\n    except:",
+        "peekOfCode": "def getContentFromId(outputDir, submissionId) -> VideoScript:\n    print(f\"Getting content from id: {submissionId}\")\n    reddit = __getReddit()\n    existingPostIds = __getExistingPostIds(outputDir)\n    if (submissionId in existingPostIds):\n        print(\"Video already exists!\")\n        exit()\n    try:\n        submission = reddit.submission(submissionId)\n    except Exception:",
+        "detail": "reddit",
+        "documentation": {}
+    },
+    {
+        "label": "config",
+        "kind": 5,
+        "importPath": "reddit",
+        "description": "reddit",
+        "peekOfCode": "config = configparser.ConfigParser()\nconfig.read('config.ini')\nCLIENT_ID = config[\"Reddit\"][\"CLIENT_ID\"]\nCLIENT_SECRET = config[\"Reddit\"][\"CLIENT_SECRET\"]\nUSER_AGENT = config[\"Reddit\"][\"USER_AGENT\"]\nSUBREDDIT = config[\"Reddit\"][\"SUBREDDIT\"]\ndef getContent(outputDir, postOptionCount) -> VideoScript:\n    reddit = __getReddit()\n    existingPostIds = __getExistingPostIds(outputDir)\n    now = int(time.time())",
         "detail": "reddit",
         "documentation": {}
     },
@@ -225,7 +243,7 @@
         "kind": 5,
         "importPath": "reddit",
         "description": "reddit",
-        "peekOfCode": "CLIENT_ID = \"YOUR_CLIENT_ID_HERE\"\nCLIENT_SECRET = \"YOUR_CLIENT_SECRET_HERE\"\nUSER_AGENT = \"YOUR_USER_AGENT_HERE\" \n# user_agent sounds scary, but it's just a string to identify what your using it for\n# It's common courtesy to use something like <platform>:<name>:<version> by <your name>\n# ex. \"Window11:TestApp:v0.1 by u/Shifty-The-Dev\"\nSUBREDDIT = \"askreddit\"\nREDDIT_URL = \"https://www.reddit.com/\"\ndef getContent(outputDir, postOptionCount) -> VideoScript:\n    reddit = __getReddit()",
+        "peekOfCode": "CLIENT_ID = config[\"Reddit\"][\"CLIENT_ID\"]\nCLIENT_SECRET = config[\"Reddit\"][\"CLIENT_SECRET\"]\nUSER_AGENT = config[\"Reddit\"][\"USER_AGENT\"]\nSUBREDDIT = config[\"Reddit\"][\"SUBREDDIT\"]\ndef getContent(outputDir, postOptionCount) -> VideoScript:\n    reddit = __getReddit()\n    existingPostIds = __getExistingPostIds(outputDir)\n    now = int(time.time())\n    autoSelect = postOptionCount == 0\n    posts = []",
         "detail": "reddit",
         "documentation": {}
     },
@@ -234,7 +252,7 @@
         "kind": 5,
         "importPath": "reddit",
         "description": "reddit",
-        "peekOfCode": "CLIENT_SECRET = \"YOUR_CLIENT_SECRET_HERE\"\nUSER_AGENT = \"YOUR_USER_AGENT_HERE\" \n# user_agent sounds scary, but it's just a string to identify what your using it for\n# It's common courtesy to use something like <platform>:<name>:<version> by <your name>\n# ex. \"Window11:TestApp:v0.1 by u/Shifty-The-Dev\"\nSUBREDDIT = \"askreddit\"\nREDDIT_URL = \"https://www.reddit.com/\"\ndef getContent(outputDir, postOptionCount) -> VideoScript:\n    reddit = __getReddit()\n    existingPostIds = __getExistingPostIds(outputDir)",
+        "peekOfCode": "CLIENT_SECRET = config[\"Reddit\"][\"CLIENT_SECRET\"]\nUSER_AGENT = config[\"Reddit\"][\"USER_AGENT\"]\nSUBREDDIT = config[\"Reddit\"][\"SUBREDDIT\"]\ndef getContent(outputDir, postOptionCount) -> VideoScript:\n    reddit = __getReddit()\n    existingPostIds = __getExistingPostIds(outputDir)\n    now = int(time.time())\n    autoSelect = postOptionCount == 0\n    posts = []\n    postOptionCount = postOptionCount if postOptionCount != 0 else 1",
         "detail": "reddit",
         "documentation": {}
     },
@@ -243,7 +261,7 @@
         "kind": 5,
         "importPath": "reddit",
         "description": "reddit",
-        "peekOfCode": "USER_AGENT = \"YOUR_USER_AGENT_HERE\" \n# user_agent sounds scary, but it's just a string to identify what your using it for\n# It's common courtesy to use something like <platform>:<name>:<version> by <your name>\n# ex. \"Window11:TestApp:v0.1 by u/Shifty-The-Dev\"\nSUBREDDIT = \"askreddit\"\nREDDIT_URL = \"https://www.reddit.com/\"\ndef getContent(outputDir, postOptionCount) -> VideoScript:\n    reddit = __getReddit()\n    existingPostIds = __getExistingPostIds(outputDir)\n    now = int(time.time())",
+        "peekOfCode": "USER_AGENT = config[\"Reddit\"][\"USER_AGENT\"]\nSUBREDDIT = config[\"Reddit\"][\"SUBREDDIT\"]\ndef getContent(outputDir, postOptionCount) -> VideoScript:\n    reddit = __getReddit()\n    existingPostIds = __getExistingPostIds(outputDir)\n    now = int(time.time())\n    autoSelect = postOptionCount == 0\n    posts = []\n    postOptionCount = postOptionCount if postOptionCount != 0 else 1\n    print(f\"postOptionCount: {postOptionCount}\")",
         "detail": "reddit",
         "documentation": {}
     },
@@ -252,16 +270,7 @@
         "kind": 5,
         "importPath": "reddit",
         "description": "reddit",
-        "peekOfCode": "SUBREDDIT = \"askreddit\"\nREDDIT_URL = \"https://www.reddit.com/\"\ndef getContent(outputDir, postOptionCount) -> VideoScript:\n    reddit = __getReddit()\n    existingPostIds = __getExistingPostIds(outputDir)\n    now = int(time.time())\n    autoSelect = postOptionCount == 0\n    posts = []\n    postOptionCount = postOptionCount if postOptionCount != 0 else 1\n    print(f\"postOptionCount: {postOptionCount}\")",
-        "detail": "reddit",
-        "documentation": {}
-    },
-    {
-        "label": "REDDIT_URL",
-        "kind": 5,
-        "importPath": "reddit",
-        "description": "reddit",
-        "peekOfCode": "REDDIT_URL = \"https://www.reddit.com/\"\ndef getContent(outputDir, postOptionCount) -> VideoScript:\n    reddit = __getReddit()\n    existingPostIds = __getExistingPostIds(outputDir)\n    now = int(time.time())\n    autoSelect = postOptionCount == 0\n    posts = []\n    postOptionCount = postOptionCount if postOptionCount != 0 else 1\n    print(f\"postOptionCount: {postOptionCount}\")\n    for submission in reddit.subreddit(SUBREDDIT).top(time_filter=\"day\", limit=postOptionCount*3):",
+        "peekOfCode": "SUBREDDIT = config[\"Reddit\"][\"SUBREDDIT\"]\ndef getContent(outputDir, postOptionCount) -> VideoScript:\n    reddit = __getReddit()\n    existingPostIds = __getExistingPostIds(outputDir)\n    now = int(time.time())\n    autoSelect = postOptionCount == 0\n    posts = []\n    postOptionCount = postOptionCount if postOptionCount != 0 else 1\n    print(f\"postOptionCount: {postOptionCount}\")\n    for submission in reddit.subreddit(SUBREDDIT).top(time_filter=\"day\", limit=postOptionCount*3):",
         "detail": "reddit",
         "documentation": {}
     },

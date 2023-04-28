@@ -11,5 +11,9 @@ pyvenv.cfg
 client_secrets.json
 geckodriver.log
 config.ini
+<<<<<<< HEAD
 cookies.json 
 newcookies.json 
+=======
+cookies.json
+>>>>>>> 03711aa (d)
